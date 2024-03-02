@@ -1,0 +1,67 @@
+// import java.util.Scanner;
+import java.util.*;
+public class ValidEmail{
+    public static void main(String[] arg){
+        Scanner sc=new Scanner(System.in);
+        System.out.println("Enter the Email: ");
+        String email=sc.nextLine();
+
+        if(validEmail(email)){
+            System.out.println("Valid Email"); 
+        }
+        else
+        System.out.println("Invalid Email");
+       
+    }   
+    static boolean validEmail(String email){
+        if(!Character.isLetter(email.charAt(0)) || !Character.isLetter(email.charAt(email.length()-1))){
+            return false;
+        }
+        String[] arr=email.split("@");
+        if(arr.length != 2){
+            return false;
+        }
+        String first=arr[0];
+        if(first.charAt(first.length()-1)=='.'){
+            return false;
+        }
+            for(int j=0;j<first.length();j++){
+                char k=first.charAt(j);
+            
+                if((Character.isLetterOrDigit(k) && Character.isLowerCase(k)) || k=='.'){
+                   
+                    if(j<arr[0].length()-1 && k=='.' && arr[0].charAt(j+1) =='.'){
+                        return false;
+                    }
+                    
+                    else{
+                        
+                    }
+                }
+            }
+        String second=arr[1];
+        int count=0;
+        if(second==null){return false;}  
+        if(!Character.isLetter(second.charAt(0))){
+            return false;
+        }            
+        for(int i=0;i<second.length();i++){
+            char k=second.charAt(i);
+            if(k=='.'){
+                count++;
+            }
+            if(Character.isLowerCase(k) || k=='.'){
+                if(i<second.length()-1 && k=='.' && second.charAt(i+1) =='.'){
+                    return false;
+                }
+            }    
+            else{
+                return false;
+            }       
+        } 
+        if(count<1 || count>2){
+            return false;
+        }
+           return true;
+    }
+}
